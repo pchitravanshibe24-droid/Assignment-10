@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int firstNonRepeating(const vector<int>& nums) {
+    unordered_map<int, int> freq;
+
+    // 1st pass: count frequencies
+    for (int x : nums) {
+        freq[x]++;
+    }
+
+    // 2nd pass: find first element with freq = 1
+    for (int x : nums) {
+        if (freq[x] == 1) return x;
+    }
+
+    // If no non-repeating element
+    return -1;    // or handle differently
+}
+
+int main() {
+    vector<int> nums = {4, 5, 1, 2, 0, 4};
+
+    int ans = firstNonRepeating(nums);
+
+    if (ans != -1)
+        cout << ans << endl;     // expected: 5
+    else
+        cout << "No non-repeating element\n";
+
+    return 0;
+}
