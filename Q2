@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> findCommon(const vector<int>& A, const vector<int>& B) {
+    unordered_set<int> setA;
+    for (int x : A) {
+        setA.insert(x);
+    }
+
+    unordered_set<int> resultSet;
+    for (int y : B) {
+        if (setA.find(y) != setA.end()) {
+            resultSet.insert(y);     // to avoid duplicates
+        }
+    }
+
+    // Convert set to vector
+    vector<int> result(resultSet.begin(), resultSet.end());
+    return result;
+}
+
+int main() {
+    vector<int> A = {1, 2, 3, 4};
+    vector<int> B = {3, 4, 5, 6};
+
+    vector<int> common = findCommon(A, B);
+
+    // Optional: sort for neat output
+    sort(common.begin(), common.end());
+
+    for (int x : common) {
+        cout << x << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
