@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+    Node(int d) : data(d), next(nullptr) {}
+};
+
+bool hasCycle(Node* head) {
+    unordered_set<Node*> visited;    // store node addresses
+
+    Node* curr = head;
+    while (curr != nullptr) {
+        if (visited.find(curr) != visited.end()) {
+            // we have seen this node address before → loop
+            return true;
+        }
+        visited.insert(curr);
+        curr = curr->next;
+    }
+    return false;
+}
+
+int main() {
+    // Creating: 1 -> 2 -> 3 -> 4 -> back to 2
+    Node* n1 = new Node(1);
+    Node* n2 = new Node(2);
+    Node* n3 = new Node(3);
+    Node* n4 = new Node(4);
+
+    n1->next = n2;
+    n2->next = n3;
+    n3->next = n4;
+    n4->next = n2;   // loop here (back to node 2)
+
+    if (hasCycle(n1))
+        cout << "true\n";     // loop exists
+    else
+        cout << "false\n";
+
+    // Note: memory freeing is skipped here due to loop, in real code handle carefully.
+    return 0;
+}
